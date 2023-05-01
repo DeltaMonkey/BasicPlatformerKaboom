@@ -5,9 +5,9 @@
   "source": "src/index.html",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/**/*.css dist/",
-    "build": "npm run clean && parcel build && npm run copy-files",
-    "start": "npm run clean && parcel && npm run copy-files"
+    "copy-files": "copyfiles -u 1 src/**/*.css src/assets/* dist/",
+    "build": "npm run clean && npm run copy-files && parcel build",
+    "start": "npm run clean && npm run copy-files && parcel"
   },
   "author": "",
   "license": "ISC",

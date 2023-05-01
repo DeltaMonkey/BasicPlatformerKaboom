@@ -1,5 +1,7 @@
 import k from './kaboom';
 
-k.scene('game', () => { return {} });
+import Platformer from './scenes/Platformer';
 
-k.go('game');
+k.scene('platformer', Platformer);
+
+k.go('platformer');
