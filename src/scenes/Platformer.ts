@@ -20,13 +20,14 @@ export default function Platformer() {
         anchor,
         onKeyPress,
         onKeyDown,
+        onKeyRelease,
         setGravity,
         outline
     } = k;
 
     debug.inspect = false;
 
-    setGravity(4900);
+    setGravity(2450);
     
     //loadSprite('box', '/assets/asset_1.png')
 
@@ -55,7 +56,16 @@ export default function Platformer() {
         if(player.isGrounded())
             player.jump();
     })
+
+    onKeyRelease("space", () => {
+        if(!player.isGrounded())
+            player.gravityScale = 3;
+    })
     
+    player.onGround(() => {
+        player.gravityScale = 1;
+    })
+
     onKeyDown("left", () => {
         player.move(-100, 0);
     })
