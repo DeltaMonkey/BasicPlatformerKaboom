@@ -3,8 +3,9 @@ import k from "../kaboom";
 import { AreaComp } from "kaboom";
 import { BodyComp } from "kaboom";
 import { AnchorComp } from "kaboom";
+import controls, { ControlsComp } from "../components/controls";
 
-export type PlayerComp = GameObj<PosComp | RectComp | ColorComp | AreaComp | BodyComp | AnchorComp | OutlineComp >;
+export type PlayerComp = GameObj<PosComp | RectComp | ColorComp | AreaComp | BodyComp | AnchorComp | OutlineComp | ControlsComp>;
 
 export default function Platformer() {
     const {
@@ -18,9 +19,6 @@ export default function Platformer() {
         area,
         body,
         anchor,
-        onKeyPress,
-        onKeyDown,
-        onKeyRelease,
         setGravity,
         outline
     } = k;
@@ -39,7 +37,8 @@ export default function Platformer() {
         area(),
         body(),
         anchor("center"),
-        outline(2, color(0,0,0).color)
+        outline(2, color(0,0,0).color),
+        controls()
     ]);
 
     let platform = add([
@@ -51,26 +50,4 @@ export default function Platformer() {
         anchor("topleft"),
         outline(2, color(0,0,0).color)
     ]);
-
-    onKeyPress("space", () => {
-        if(player.isGrounded())
-            player.jump();
-    })
-
-    onKeyRelease("space", () => {
-        if(!player.isGrounded())
-            player.gravityScale = 3;
-    })
-    
-    player.onGround(() => {
-        player.gravityScale = 1;
-    })
-
-    onKeyDown("left", () => {
-        player.move(-100, 0);
-    })
-
-    onKeyDown("right", () => {
-        player.move(+100, 0);
-    })
 }
